@@ -2,9 +2,11 @@ package com.epicodus.alphabet;
 
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class AlphabetAdapter extends BaseAdapter {
     private Context mContext;
@@ -17,7 +19,7 @@ public class AlphabetAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mLetters.length;
     }
 
     @Override
@@ -31,7 +33,22 @@ public class AlphabetAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View gridView;
+
+        if (convertView == null){
+            gridView = inflater.inflate(R.layout.alphabet_grid_item, null);
+
+                TextView letterView = (TextView) gridView
+                        .findViewById(R.id.grid_item_letter);
+
+                letterView.setText("A");
+        } else {
+            gridView = (View) convertView;
+        }
+        return gridView;
     }
 }
